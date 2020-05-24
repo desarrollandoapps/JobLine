@@ -22,7 +22,7 @@
     "@angular/platform-browser-dynamic": "~9.1.9",
     "@angular/router": "~9.1.9",
     "bootstrap": "4.5.0",
-    "jquery": "^1.9.1",
+    "jquery": "^3.5.0",
     "ngx-owl-carousel-o": "^3.0.1",
     "popper.js": "^1.16.1",
     "rxjs": "~6.5.4",
