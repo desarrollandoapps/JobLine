@@ -39,3 +39,12 @@
     height: auto;
     border-radius: 0 50px 50px 0 !important;
 }
+
+@media (max-width: 800px) {
+    .form-control {
+        width: 80%;
+    }
+    .searchbtn {
+        width: 20%;
+    }
+}

@@ -2,3 +2,30 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.cart-item {
+    font-size: small;
+}
+
+.filtros {
+    font-size: small;
+}
+
+.btn-product {
+    font-size: smaller;
+}
+
+.hvr-glow {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: box-shadow;
+    transition-property: box-shadow;
+  }
+.hvr-glow:hover, .hvr-glow:focus, .hvr-glow:active {
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+}
