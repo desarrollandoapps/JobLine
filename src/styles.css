@@ -1,7 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    background-color: #F3F1F0;
+}
 
 .cart-item {
     font-size: small;
@@ -28,4 +32,33 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
 .hvr-glow:hover, .hvr-glow:focus, .hvr-glow:active {
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+}
+
+.negro {
+    background-color: black;
+}
+
+.btn-principal
+{
+    background-color: #C93A3F;
+    border-color: #C93A3F;;
+}
+
+.imsocial {
+    position: fixed;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left: 20px;
+    z-index: 99;
+    box-sizing: border-box;
+    color: white;
+}
+
+.imsocial a {
+    color: white;
+    text-align: center;
+    display: block;
+    margin: 15px 0;
+    filter: drop-shadow(1px 1px 3px #5a5353);
 }

@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { faFacebookF } from '@fortawesome/free-brands-svg-icons';
+import { faInstagram } from '@fortawesome/free-brands-svg-icons';
+import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -10,4 +13,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'JobLine';
+  faFacebookF = faFacebookF;
+  faInstagram = faInstagram;
+  faYoutube = faYoutube;
 }

@@ -1,0 +1,37 @@
+footer {
+    background-color: #212023;
+    padding-top: 150px;
+    color: #B4B4B4;
+}
+
+a {
+    color: #B4B4B4;
+}
+
+.titulo {
+    color: white;
+    font-size: xxx-large;
+}
+
+.columnas-footer {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    color: #B4B4B4;
+    border-style: solid none none none;
+    border-width: 0.5px;
+}
+
+.logo {
+    width: 130px;
+    height: 30px;
+}
+
+.footer-pie {
+    background-color: black;
+    padding: 20px 0px 10px 0px;
+    color: #555555;
+}
+
+.footer-pie a {
+    color: #555555;
+}
