@@ -19,7 +19,7 @@
                 </li>
             </ul>
             <form class="form-inline">
-                <input class="form-control" type="text" placeholder="Buscar productos" aria-label="Search">
+                <input [formControl]="search" class="form-control" type="text" placeholder="Buscar productos" aria-label="Search">
                 <button class="searchbtn" type="submit">Buscar</button>
             </form>
          </div>

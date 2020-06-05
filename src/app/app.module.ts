@@ -7,19 +7,23 @@ registerLocaleData(localeEsCo, 'es-CO');
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { NavComponent } from './components/shared/nav/nav.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { CarouselComponent } from './components/shared/carousel/carousel.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CarouselModule } from 'ngx-owl-carousel-o';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { FiltersComponent } from './components/shopping-cart/filters/filters.component';
 import { ProductListComponent } from './components/shopping-cart/product-list/product-list.component';
 import { CartComponent } from './components/shopping-cart/cart/cart.component';
 import { CartItemComponent } from './components/shopping-cart/cart/cart-item/cart-item.component';
 import { ProductItemComponent } from './components/shopping-cart/product-list/product-item/product-item.component';
-import { HttpClientModule } from '@angular/common/http';
+
+import { CarouselModule } from 'ngx-owl-carousel-o';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SearchPipe } from './pipes/search.pipe';
 
 @NgModule({
   declarations: [
@@ -33,6 +37,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CartComponent,
     CartItemComponent,
     ProductItemComponent,
+    SearchPipe,
   ],
   imports: [
     BrowserModule,
@@ -41,6 +46,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CarouselModule,
     HttpClientModule,
     FontAwesomeModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'es-Co' }],
   bootstrap: [AppComponent]

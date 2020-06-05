@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { faFacebookF } from '@fortawesome/free-brands-svg-icons';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
@@ -16,4 +16,13 @@ export class AppComponent {
   faFacebookF = faFacebookF;
   faInstagram = faInstagram;
   faYoutube = faYoutube;
+
+  valorFiltro = '';
+
+  handleSearch(search: string) {
+    this.valorFiltro = search;
+  }
+
+  @Output('valorFiltro') valor:string;
+
 }

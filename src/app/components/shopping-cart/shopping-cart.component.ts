@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShoppingCartComponent implements OnInit {
 
+  @Input() valor_filtro: string;
+
+  busco = false;
+
   constructor() { }
 
   ngOnInit(): void {
+    //TODO: cambiar valor de busco según valor_filtro
   }
 
 }
