@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class SearchPipe implements PipeTransform {
 
   transform(lista: any[], search:string): any[] {
-    console.log(search);
+    console.log("Pipe: " + search);
     
     if (!search) return lista;
 

@@ -1,4 +1,4 @@
-<app-nav (search)="handleSearch($event)"></app-nav>
+<app-nav></app-nav>
 <app-carousel></app-carousel>
 
 <div class="row">
@@ -18,7 +18,7 @@
 <div class="container">
   <div class="row">
       <div class="col">
-        <app-shopping-cart [valor_filtro]="valorFiltro"></app-shopping-cart>
+        <router-outlet></router-outlet>
       </div>
   </div>
 </div>

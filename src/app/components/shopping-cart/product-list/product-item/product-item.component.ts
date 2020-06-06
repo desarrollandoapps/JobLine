@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Producto } from 'src/app/interfaces/producto';
 import { MessengerService} from 'src/app/services/messenger.service'
+import { Globals } from 'src/app/globals';
 
 @Component({
   selector: 'app-product-item',
@@ -14,7 +15,7 @@ export class ProductItemComponent implements OnInit {
   @Input() producto: Producto;
 
   constructor(private msg: MessengerService) { 
-    this.over = 'none';
+    this.over = 'none';    
   }
 
   ngOnInit(): void {

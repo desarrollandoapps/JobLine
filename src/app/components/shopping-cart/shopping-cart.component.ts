@@ -7,8 +7,6 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ShoppingCartComponent implements OnInit {
 
-  @Input() valor_filtro: string;
-
   busco = false;
 
   constructor() { }

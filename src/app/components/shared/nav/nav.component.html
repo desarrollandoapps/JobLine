@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Inicio</a>
+                    <a class="nav-link" routerLink="home">Inicio</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Categorías</a>
@@ -19,8 +19,8 @@
                 </li>
             </ul>
             <form class="form-inline">
-                <input [formControl]="search" class="form-control" type="text" placeholder="Buscar productos" aria-label="Search">
-                <button class="searchbtn" type="submit">Buscar</button>
+                <input #textoBuscar class="form-control" type="text" placeholder="Buscar productos" aria-label="Search">
+                <button class="searchbtn" (click)="buscarItem(textoBuscar)">Buscar</button>
             </form>
          </div>
     </nav>

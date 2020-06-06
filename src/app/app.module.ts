@@ -6,6 +6,7 @@ import localeEsCo from '@angular/common/locales/es-CO';
 registerLocaleData(localeEsCo, 'es-CO');
 
 import { AppRoutingModule } from './app-routing.module';
+import { Route, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -24,6 +25,15 @@ import { ProductItemComponent } from './components/shopping-cart/product-list/pr
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SearchPipe } from './pipes/search.pipe';
+import { Globals } from './globals';
+import { PoliticasComponent } from './components/privacidad/politicas/politicas.component';
+
+const routes: Route[] = [
+  {path: '', component: ShoppingCartComponent},
+  {path: 'home', component: ShoppingCartComponent},
+  {path: 'privacidad', component: PoliticasComponent}
+];
+
 
 @NgModule({
   declarations: [
@@ -38,9 +48,11 @@ import { SearchPipe } from './pipes/search.pipe';
     CartItemComponent,
     ProductItemComponent,
     SearchPipe,
+    PoliticasComponent,
   ],
   imports: [
     BrowserModule,
+    RouterModule.forRoot(routes),
     AppRoutingModule,
     BrowserAnimationsModule,
     CarouselModule,
@@ -49,7 +61,10 @@ import { SearchPipe } from './pipes/search.pipe';
     ReactiveFormsModule,
     FormsModule,
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'es-Co' }],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'es-Co' },
+    Globals
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
