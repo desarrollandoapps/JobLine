@@ -27,6 +27,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SearchPipe } from './pipes/search.pipe';
 import { Globals } from './globals';
 import { PoliticasComponent } from './components/privacidad/politicas/politicas.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 const routes: Route[] = [
   {path: '', component: ShoppingCartComponent},
@@ -49,6 +50,7 @@ const routes: Route[] = [
     ProductItemComponent,
     SearchPipe,
     PoliticasComponent,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,

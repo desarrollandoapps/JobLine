@@ -8,11 +8,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" routerLink="home">Inicio</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Categorías</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="categorias" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categorías</a>
+                    <div class="dropdown-menu" aria-labelledby="categorias">
+                      <a class="dropdown-item" (click)="filtrarPorCategoria( '' )">TODAS</a>
+                      <a class="dropdown-item" *ngFor="let categoria of categorias" (click)="filtrarPorCategoria( categoria.id )" > {{categoria.nombre}} </a>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i></a>

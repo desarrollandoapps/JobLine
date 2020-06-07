@@ -6,18 +6,21 @@
         <form>
             <div class="form-group">
                 <label for="desde">Desde</label>
-                <input type="number" class="form-control" id="desde" name="desde" placeholder="$1000">
+                <input #textoDesde type="number" class="form-control" placeholder="$1000">
             </div>
             <div class="form-group">
                 <label for="hasta">Hasta</label>
-                <input type="number" class="form-control" id="hasta" name="hasta" placeholder="$1000000">
+                <input #textoHasta type="number" class="form-control" placeholder="$1000000">
             </div>
             <hr>
             <div class="form-group">
                 <label for="categoria">Categoría</label>
-                <select name="categoria" id="categoria" class="custom-select"></select>
+                <select #textoCategoria name="categoria" class="custom-select">
+                  <option value="{{categoria.id}}" *ngFor="let categoria of categorias"> {{categoria.nombre}} </option>
+                </select>
             </div>
             <hr>
+            <!--
             <div class="input-group">
                 <label>Ordenar</label>
                 <div class="radio">
@@ -31,8 +34,8 @@
                     </label>
                 </div>
             </div>
-
-            <button class="btn btn-primary btn-block btn-sm">Filtrar</button>
+            -->
+            <button class="btn btn-primary btn-block btn-sm" (click)="filtrarItems(textoDesde, textoHasta, textoCategoria)">Filtrar</button>
         </form>
     </div>
 </div>
