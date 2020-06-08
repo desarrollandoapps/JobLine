@@ -1,0 +1,29 @@
+.imagen {
+    max-height: 500px;
+    max-width: 500px;
+}
+
+.texto-card {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.display-4 {
+    font-size: 40px;
+}
+
+.text-muted {
+    font-size: 20px;
+}
+
+.size-2 {
+    font-size: 12px;
+}
+
+select {
+    border: none;
+}
+
+.detalle {
+    font-size: medium;
+}

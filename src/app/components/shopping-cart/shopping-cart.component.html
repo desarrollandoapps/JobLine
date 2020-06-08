@@ -1,11 +1,11 @@
 <div class="row">
-    <div *ngIf="busco" class="col">
+    <div [ngClass]="{'col-md-2': busco, 'd-none': !busco}">
         <app-filters></app-filters>
     </div>
-    <div class="col-md-12">
+    <div [ngClass]="{'col-md-8': busco, 'col-md-12': !busco}">
         <app-product-list></app-product-list>
     </div>
-    <div *ngIf="!busco" class="col">
+    <div [ngClass]="{'col-md-2': busco, 'd-none': !busco}">
         <app-cart></app-cart>
-    </div>
+      </div>
 </div>

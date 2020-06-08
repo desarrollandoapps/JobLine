@@ -16,7 +16,8 @@
             <div class="form-group">
                 <label for="categoria">Categoría</label>
                 <select #textoCategoria name="categoria" class="custom-select">
-                  <option value="{{categoria.id}}" *ngFor="let categoria of categorias"> {{categoria.nombre}} </option>
+                    <option value="">TODAS</option>
+                    <option value="{{categoria.id}}" *ngFor="let categoria of categorias"> {{categoria.nombre}} </option>
                 </select>
             </div>
             <hr>

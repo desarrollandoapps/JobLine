@@ -28,11 +28,13 @@ import { SearchPipe } from './pipes/search.pipe';
 import { Globals } from './globals';
 import { PoliticasComponent } from './components/privacidad/politicas/politicas.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { ViewProductComponent } from './components/view-product/view-product.component';
 
 const routes: Route[] = [
   {path: '', component: ShoppingCartComponent},
   {path: 'home', component: ShoppingCartComponent},
-  {path: 'privacidad', component: PoliticasComponent}
+  {path: 'privacidad', component: PoliticasComponent},
+  {path: 'producto', component: ViewProductComponent}
 ];
 
 
@@ -51,6 +53,7 @@ const routes: Route[] = [
     SearchPipe,
     PoliticasComponent,
     FilterPipe,
+    ViewProductComponent,
   ],
   imports: [
     BrowserModule,

@@ -10,12 +10,9 @@ import { Globals } from 'src/app/globals';
 })
 export class ProductItemComponent implements OnInit {
 
-  over: string;
-
   @Input() producto: Producto;
 
-  constructor(private msg: MessengerService) { 
-    this.over = 'none';    
+  constructor(private msg: MessengerService, private globals: Globals) {    
   }
 
   ngOnInit(): void {
@@ -23,6 +20,12 @@ export class ProductItemComponent implements OnInit {
 
   handleAddToCart() {
     this.msg.sendMsg(this.producto)
+  }
+
+  public cargarProducto(producto: Producto)
+  {
+    this.globals.producto = producto;
+    console.log(this.globals.producto);
   }
 
 }
