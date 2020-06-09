@@ -48,6 +48,12 @@
   color: #FFF !important;
 }
 
+.rounded-circle {
+    margin-left: 10px;
+    max-width: 30px;
+    border: 2px solid #FFF;
+}
+
 @media (max-width: 800px) {
     .form-control {
         width: 80%;

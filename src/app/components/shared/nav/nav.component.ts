@@ -22,6 +22,7 @@ export class NavComponent implements OnInit {
 
   valBuscar: string;
   valorCateg: string;
+  cantProd: number;
 
   @ViewChild('itemId') itemId;
 
@@ -41,6 +42,8 @@ export class NavComponent implements OnInit {
       this.categorias = data;
     });
 
+    this.cantProd = 0;
+
   }
 
   ngOnInit(): void {
@@ -55,7 +58,15 @@ export class NavComponent implements OnInit {
 
   public buscarItem(buscarInput: HTMLInputElement)
   {
-    this.buscadorService.updateBroadcastMessage(buscarInput.value);
+    if (buscarInput)
+    {
+      this.buscadorService.updateBroadcastMessage(buscarInput.value);
+    }
+    else 
+    {
+      this.buscadorService.updateBroadcastMessage('');
+      this.valBuscar = '';
+    }
     console.log(buscarInput.value);
 
     // this.buscarSubject.next(this.valBuscar);

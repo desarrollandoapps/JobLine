@@ -19,12 +19,13 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i></a>
+                    <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i><span class="badge badge-warning">{{cantProd}}</span></a>
                 </li>
             </ul>
             <form class="form-inline">
-                <input #textoBuscar class="form-control" type="text" placeholder="Buscar productos" aria-label="Search">
+                <input #textoBuscar [(ngModel)]="valBuscar" value="{{valBuscar}}" class="form-control" type="text" placeholder="Buscar productos" aria-label="Search">
                 <button class="searchbtn" (click)="buscarItem(textoBuscar)">Buscar</button>
+                <img src="../../../../assets/img/nav/delete.jpg" alt="Limpiar" class="rounded-circle" (click)="buscarItem(null)">
             </form>
          </div>
     </nav>
