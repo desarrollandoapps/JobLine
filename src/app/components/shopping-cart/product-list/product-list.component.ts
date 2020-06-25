@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ProductosService } from 'src/app/services/productos.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Producto } from 'src/app/interfaces/producto';
 import { FormControl } from '@angular/forms';
 import { BuscadorService } from 'src/app/services/buscador.service';
@@ -33,14 +33,15 @@ export class ProductListComponent implements OnInit {
     this.filtrarServiceHasta.broadcast.subscribe( hasta => this.valorHasta = hasta );
     this.filtrarServiceCateg.broadcast.subscribe( categ => this.valorCateg = categ );
 
-    console.log('filtro: ' + this.valorFiltro);
-    console.log('desde: ' + this.valorDesde );
-    console.log('hasta: ' + this.valorHasta );
-    console.log('categ: ' + this.valorCateg );
+    // console.log('filtro: ' + this.valorFiltro);
+    // console.log('desde: ' + this.valorDesde );
+    // console.log('hasta: ' + this.valorHasta );
+    // console.log('categ: ' + this.valorCateg );
 
     httpClient.get(this.API_ENDPOINT).subscribe((data: Producto[]) => {
       this.productos = data;
     });
+    
   }
 
   ngOnInit(): void {

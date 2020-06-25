@@ -2,6 +2,7 @@ import { Component, Output } from '@angular/core';
 import { faFacebookF } from '@fortawesome/free-brands-svg-icons';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { AuthTokenService } from './services/auth-token.service';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,10 @@ export class AppComponent {
   faYoutube = faYoutube;
 
   valorFiltro = '';
+
+  constructor(private authToken: AuthTokenService) {
+    
+  }
 
   handleSearch(search: string) {
     this.valorFiltro = search;

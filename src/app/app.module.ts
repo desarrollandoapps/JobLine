@@ -9,7 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { Route, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NavComponent } from './components/shared/nav/nav.component';
@@ -29,6 +29,7 @@ import { Globals } from './globals';
 import { PoliticasComponent } from './components/privacidad/politicas/politicas.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { ViewProductComponent } from './components/view-product/view-product.component';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
 
 const routes: Route[] = [
   {path: '', component: ShoppingCartComponent},
@@ -67,6 +68,11 @@ const routes: Route[] = [
     FormsModule,
   ],
   providers: [
+    { 
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    },
     { provide: LOCALE_ID, useValue: 'es-Co' },
     Globals
   ],

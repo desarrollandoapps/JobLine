@@ -48,31 +48,20 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void {
     this.buscadorService.broadcast.subscribe(broadcast => this.valBuscar = broadcast);
-    // this.filtrarServiceCategoria.broadcast.subscribe( broadcastCategoria => this.valorCateg = broadcastCategoria );
-    // this.search.valueChanges
-    // .pipe(debounceTime(300))
-    // .subscribe(value => this.searchEmmiter.emit(value));
   }
-
-  // @Output('search') searchEmmiter = new EventEmitter<string>();
 
   public buscarItem(buscarInput: HTMLInputElement)
   {
-    if (buscarInput)
-    {
-      this.buscadorService.updateBroadcastMessage(buscarInput.value);
-    }
-    else 
+    if (buscarInput === null)
     {
       this.buscadorService.updateBroadcastMessage('');
       this.valBuscar = '';
     }
-    console.log(buscarInput.value);
-
-    // this.buscarSubject.next(this.valBuscar);
-    // this.globals.valBuscar = this.valBuscar;
+    else if (buscarInput)
+    {
+      this.buscadorService.updateBroadcastMessage(buscarInput.value);
+    }
   }
-
 
   public mostrarTodas( id: string) {
     console.log( 'Click: ' + id );

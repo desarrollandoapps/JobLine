@@ -14,7 +14,7 @@ export class ShoppingCartComponent implements OnInit {
 
   constructor(private buscadorService: BuscadorService) { 
     this.buscadorService.broadcast.subscribe( valor => this.valorFiltro = valor );
-    console.log('filtro en shopping-cart: ' + this.valorFiltro);
+    // console.log('filtro en shopping-cart: ' + this.valorFiltro);
   }
 
   ngOnInit(): void { }

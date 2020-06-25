@@ -23,7 +23,7 @@
                 </li>
             </ul>
             <form class="form-inline">
-                <input #textoBuscar [(ngModel)]="valBuscar" value="{{valBuscar}}" class="form-control" type="text" placeholder="Buscar productos" aria-label="Search">
+                <input #textoBuscar [(ngModel)]="valBuscar" value="{{valBuscar}}" class="form-control" type="text" placeholder="Buscar productos" aria-label="Search" [ngModelOptions]="{standalone:true}">
                 <button class="searchbtn" (click)="buscarItem(textoBuscar)">Buscar</button>
                 <img src="../../../../assets/img/nav/delete.jpg" alt="Limpiar" class="rounded-circle" (click)="buscarItem(null)">
             </form>
