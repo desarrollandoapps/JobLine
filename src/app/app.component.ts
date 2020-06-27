@@ -19,9 +19,19 @@ export class AppComponent {
   faYoutube = faYoutube;
 
   valorFiltro = '';
+  cargar: boolean = false;
 
   constructor(private authToken: AuthTokenService) {
-    
+    if (localStorage.getItem('token'))
+    {
+      this.cargar = true;
+    }
+    if (localStorage.getItem('cargar'))
+    {
+      this.cargar = false;
+      localStorage.removeItem('cargar')
+      localStorage.removeItem('In')
+    }
   }
 
   handleSearch(search: string) {
@@ -29,5 +39,10 @@ export class AppComponent {
   }
 
   @Output('valorFiltro') valor:string;
+
+  ingresar() :void
+  {
+    location.reload();
+  }
 
 }

@@ -1,5 +1,20 @@
-<app-nav></app-nav>
-<app-carousel></app-carousel>
+<app-nav *ngIf="cargar else loading"></app-nav>
+<app-carousel *ngIf="cargar"></app-carousel>
+
+<ng-template #loading>
+  <div class="h-100 fondo-inicio">
+    <div class="row h-100 justify-content-center align-items-center">
+      <div class="col">
+        <div class="row justify-content-center">
+          <img src="../assets/img/nav/logo-white.png" alt="JobLineF" class="logo">
+        </div>
+        <div class="row justify-content-center">
+          <button (click)="ingresar()" class="btn btn-outline-light btn-ovalado btn-lg">Ingresar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
 
 <div class="row">
   <div class="imsocial">
@@ -22,5 +37,5 @@
       </div>
   </div>
 </div>
-<app-footer></app-footer>
+<app-footer *ngIf="cargar"></app-footer>
 

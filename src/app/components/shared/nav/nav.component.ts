@@ -1,6 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { debounceTime } from 'rxjs/operators'
 import { Globals } from 'src/app/globals';
 import { Subject } from 'rxjs';
 import { BuscadorService } from 'src/app/services/buscador.service';

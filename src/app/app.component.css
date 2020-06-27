@@ -1,0 +1,12 @@
+.fondo-inicio {
+    color: #fff;
+    background:#C93A3F;
+}
+.logo {
+    max-width: 50%;
+}
+.btn-ovalado {
+    border-radius: 50px 50px 50px 50px;
+    -moz-border-radius: 50px 50px 50px 50px;
+    -webkit-border-radius: 50px 50px 50px 50px;
+}
