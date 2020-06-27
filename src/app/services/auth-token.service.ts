@@ -11,6 +11,9 @@ export class AuthTokenService {
 
   constructor(private httpClient: HttpClient) { 
     console.log(localStorage.getItem('token'));
+    if (!localStorage.getItem('token')) {
+      localStorage.removeItem('In');
+    }
   }
 
   getToken(): string {

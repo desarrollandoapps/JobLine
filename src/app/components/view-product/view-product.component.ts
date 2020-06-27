@@ -19,9 +19,7 @@ export class ViewProductComponent implements OnInit {
 
   ngOnInit(): void {
     for(var i = 1; i <= this.producto.stock; i++)
-    {
-      console.log(i);
-      
+    {      
       this.elementos.push(i);
       if ( i == 5 )
       {

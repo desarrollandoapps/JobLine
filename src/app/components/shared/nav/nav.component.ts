@@ -8,6 +8,8 @@ import { Categoria } from 'src/app/interfaces/categoria';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { FiltrarServiceCategoria } from 'src/app/services/filtrarCategoria.service';
 import {ViewChild} from '@angular/core';
+import { MessengerService } from 'src/app/services/messenger.service';
+import { Producto } from 'src/app/interfaces/producto';
 
 @Component({
   selector: 'app-nav',
@@ -33,7 +35,7 @@ export class NavComponent implements OnInit {
 
   constructor(private globals: Globals, private buscadorService: BuscadorService,
               private categoriaService: CategoriaService, private httpClient: HttpClient,
-              private filtrarServiceCategoria: FiltrarServiceCategoria ) {
+              private filtrarServiceCategoria: FiltrarServiceCategoria, private msg: MessengerService ) {
     this.buscarSubject.subscribe(valor => this.valBuscar = valor);
     this.filtrarServiceCategoria.broadcast.subscribe( categ => this.valorCateg = categ );
 
@@ -41,12 +43,15 @@ export class NavComponent implements OnInit {
       this.categorias = data;
     });
 
-    this.cantProd = 0;
+    this.cantProd = this.contarProductos();
 
   }
 
   ngOnInit(): void {
     this.buscadorService.broadcast.subscribe(broadcast => this.valBuscar = broadcast);
+    this.msg.getMsg().subscribe((producto: Producto) => {
+      this.cantProd++
+    });
   }
 
   public buscarItem(buscarInput: HTMLInputElement)
@@ -68,6 +73,17 @@ export class NavComponent implements OnInit {
 
   public filtrarPorCategoria( id: string ) {
     this.filtrarServiceCategoria.updateBroadcastMessage(  id );
+  }
+
+  public contarProductos(): number
+  {
+    if (localStorage.getItem('codigo'))
+    {
+      var productosStr = localStorage.getItem('codigo')
+      var productos = productosStr.split('|')
+      return productos.length
+    }
+    return 0
   }
 
 }

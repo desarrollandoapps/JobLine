@@ -9,7 +9,6 @@ import { BuscadorService } from 'src/app/services/buscador.service';
 })
 export class ShoppingCartComponent implements OnInit {
 
-  busco = false;
   valorFiltro: string;
 
   constructor(private buscadorService: BuscadorService) { 

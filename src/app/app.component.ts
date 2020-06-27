@@ -30,7 +30,6 @@ export class AppComponent {
     {
       this.cargar = false;
       localStorage.removeItem('cargar')
-      localStorage.removeItem('In')
     }
   }
 

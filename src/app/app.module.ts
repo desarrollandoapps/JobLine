@@ -35,7 +35,8 @@ const routes: Route[] = [
   {path: '', component: ShoppingCartComponent},
   {path: 'home', component: ShoppingCartComponent},
   {path: 'privacidad', component: PoliticasComponent},
-  {path: 'producto', component: ViewProductComponent}
+  {path: 'producto', component: ViewProductComponent},
+  {path: 'carrito', component: CartComponent}
 ];
 
 
