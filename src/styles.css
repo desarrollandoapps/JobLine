@@ -58,3 +58,10 @@ body {
     margin: 15px 0;
     filter: drop-shadow(1px 1px 3px #5a5353);
 }
+div.row{
+    margin-right: 0px;
+ }
+ 
+ div.container-fluid{
+    padding-right: 0px;
+ }

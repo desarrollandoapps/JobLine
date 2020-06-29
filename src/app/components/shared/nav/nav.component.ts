@@ -52,8 +52,6 @@ export class NavComponent implements OnInit {
       this.categorias = data;
     });
 
-    //TODO: si hay valores en locarStorage se deben cargar en productos
-
     this.msg.getMsg().subscribe((prods) => {
       console.log('Cambio en productos')
       this.productos.push(prods['Producto'])
@@ -92,38 +90,38 @@ export class NavComponent implements OnInit {
 
   public contarProductos(): number
   {
-    var productos = []
+    this.productos = []
     if (localStorage.getItem('codigo'))
     {
       var productosStr = localStorage.getItem('codigo')
       var productosFull = productosStr.split('|')
 
-      productos.push( productosFull[0] )
+      this.productos.push( productosFull[0] )
 
       for (var i:number = 0; i < productosFull.length; i++) 
       {
-        if( !productos.includes(productosFull[i]) )
+        if( !this.productos.includes(productosFull[i]) )
         {
-          productos.push(productosFull[i])
+          this.productos.push(productosFull[i])
         }        
       }  
     }
-      return productos.length
+      return this.productos.length
   }
 
   public contar(productosOrigen): number
   {
-    var productos = []
+    this.productos = []
 
-    productos.push( productosOrigen[0] )
+    this.productos.push( productosOrigen[0] )
 
     for (var i:number = 0; i < productosOrigen.length; i++) 
     {
-      if( !productos.includes(productosOrigen[i]) )
+      if( !this.productos.includes(productosOrigen[i]) )
       {
-        productos.push(productosOrigen[i])
+        this.productos.push(productosOrigen[i])
       }        
     }  
-    return productos.length
+    return this.productos.length
   }
 }

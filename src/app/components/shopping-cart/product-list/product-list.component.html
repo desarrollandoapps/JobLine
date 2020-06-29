@@ -3,7 +3,7 @@
         <app-product-item [producto] = "producto"></app-product-item>
     </div>
 </div>
-<div class="h-100">
+<div *ngIf="productos">
     <div class="row justify-content-center">
         <pagination-controls (pageChange)="p = $event" responsive="true" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
     </div>
