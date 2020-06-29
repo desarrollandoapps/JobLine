@@ -30,6 +30,7 @@ import { PoliticasComponent } from './components/privacidad/politicas/politicas.
 import { FilterPipe } from './pipes/filter.pipe';
 import { ViewProductComponent } from './components/view-product/view-product.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 const routes: Route[] = [
   {path: '', component: ShoppingCartComponent},
@@ -67,6 +68,7 @@ const routes: Route[] = [
     FontAwesomeModule,
     ReactiveFormsModule,
     FormsModule,
+    NgxPaginationModule
   ],
   providers: [
     { 

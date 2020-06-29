@@ -52,6 +52,8 @@ export class NavComponent implements OnInit {
       this.categorias = data;
     });
 
+    //TODO: si hay valores en locarStorage se deben cargar en productos
+
     this.msg.getMsg().subscribe((prods) => {
       console.log('Cambio en productos')
       this.productos.push(prods['Producto'])

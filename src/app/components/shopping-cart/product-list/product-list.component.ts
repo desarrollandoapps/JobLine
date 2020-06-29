@@ -24,6 +24,7 @@ export class ProductListComponent implements OnInit {
   API_ENDPOINT = 'http://joblinefree.com:98/api/articulo/search/';
 
   productos: Producto[];
+  p: number = 1;
 
   constructor( private buscadorService: BuscadorService, private productoService: ProductosService,
                private httpClient: HttpClient, private filtarServiceDesde: FiltrarServiceDesde,
