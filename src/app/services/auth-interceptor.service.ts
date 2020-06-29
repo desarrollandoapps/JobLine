@@ -33,7 +33,10 @@ export class AuthInterceptorService implements HttpInterceptor {
 
       if (dias > 0)
       {
-        localStorage.clear()
+        // localStorage.clear()
+        localStorage.removeItem('In')
+        localStorage.removeItem('token')
+        localStorage.removeItem('fecha')
         localStorage.setItem('cargar', 'si')
         location.reload()
       }

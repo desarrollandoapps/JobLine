@@ -11,8 +11,10 @@ export class MessengerService {
 
   constructor() { }
 
-  sendMsg(producto: Producto) {
-    this.subject.next(producto) //Triggering an event
+  sendMsg(producto: Producto, cantidad: number) {
+    console.log('Entra a sendMsg');
+    
+    this.subject.next({Producto: producto, Cantidad: cantidad}) //Triggering an event
 
     if (!localStorage.getItem('codigo'))
     {
@@ -21,6 +23,7 @@ export class MessengerService {
       localStorage.setItem('detalle', producto.detalle)
       localStorage.setItem('precioSu', '' + producto.precioSu)
       localStorage.setItem('fotoArt', producto.fotoArt)
+      localStorage.setItem('cantidad', '' + cantidad)
     } 
     else {
       var codigo = localStorage.getItem('codigo') + '|' + producto.codigo
@@ -33,10 +36,13 @@ export class MessengerService {
       localStorage.setItem('precioSu', precioSu)
       var fotoArt = localStorage.getItem('fotoArt') + '|' + producto.fotoArt
       localStorage.setItem('fotoArt', fotoArt)
+      var cantidadP = localStorage.getItem('cantidad') + '|' + cantidad
+      localStorage.setItem('cantidad', cantidadP)
     }
   }
 
   getMsg() {
+    console.log('Entra a getMsg');
     return this.subject.asObservable()
   }
 }

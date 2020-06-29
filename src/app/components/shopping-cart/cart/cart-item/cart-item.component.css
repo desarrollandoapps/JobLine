@@ -1,0 +1,27 @@
+.img-prod {
+    border: 1px solid #f0f0f0;
+    display: inline-block;
+    max-width: 100%;
+}
+.item {
+    padding: 30px 60px 30px 40px;
+}
+.item-title {
+    font-weight: 400;
+    font-size: 16px;
+    color: #333;
+}
+.precio {
+    font-size: large;
+    color: red;
+    font-weight: 600;
+}
+.cantidad {
+    font-size: large;
+    color: darkgray;
+    font-weight: 600;
+}
+.btn-pq {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+}

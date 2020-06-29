@@ -20,8 +20,7 @@ export class ProductItemComponent implements OnInit {
   }
 
   handleAddToCart() {
-    this.msg.sendMsg(this.producto)
-    // alert('Ha agregado al carrito de compras el producto: \n' + this.producto.nombre)
+    this.msg.sendMsg(this.producto, 1)
     Swal.fire(
       'Ha agregado un producto al carrito de compras',
       this.producto.nombre,

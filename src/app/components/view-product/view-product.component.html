@@ -22,8 +22,8 @@
             <br><br>
             <div class="form-inline">
                 <span class="lead">Cantidad: </span>
-                <select class="custom-select my-1 mr-sm-2">
-                    <option *ngFor="let elemento of elementos" value="elemento">{{elemento}}</option>
+                <select class="custom-select my-1 mr-sm-2" [(ngModel)]="cantidad">
+                    <option *ngFor="let elemento of elementos" [value]="elemento">{{elemento}}</option>
                 </select>
                 <span class="text-muted size-2" *ngIf="producto.stock > 1; else elseBlock2">({{producto.stock}} disponibles)</span>
                 <ng-template #elseBlock2>
@@ -31,7 +31,7 @@
                 </ng-template>
             </div>
             <br><br>
-            <button class="btn btn-primary btn-block btn-lg">Agregar al carrito</button>
+            <button class="btn btn-primary btn-block btn-lg" (click)="handleAddToCart()">Agregar al carrito</button>
         </div>
     </div>
 </div>

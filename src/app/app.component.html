@@ -1,5 +1,5 @@
 <app-nav *ngIf="cargar else loading"></app-nav>
-<app-carousel *ngIf="cargar"></app-carousel>
+<app-carousel *ngIf="cargar && carousel"></app-carousel>
 
 <ng-template #loading>
   <div class="h-100 fondo-inicio">

@@ -1,10 +1,53 @@
-<div *ngIf="cartItems.length === 0" class="alert alert-info">El carrito está vacío.</div>
-
-<ul *ngIf="cartItems.length > 0" class="list-group">
-    <li class="list-group-item" *ngFor="let item of cartItems">
-        <app-cart-item [cartItem]="item"></app-cart-item>
-    </li>
-    <li class="list-group-item active">
-        <strong>Total: </strong>{{ cartTotal | currency: '$'}}
-    </li>
-</ul>
+<div class="row">
+    <div class="col-md-8">
+        <div class="carrito">
+        
+            <div class="card card-carrito">
+                <div class="card-body">
+                    <span class="titulo-carrito">Carrito de compras</span>
+                </div>
+            </div>
+            
+            <div class="card card-carrito" *ngIf="cartItems.length === 0">
+                <div class="card-body">
+                    <div class="alert alert-info">El carrito está vacío.</div>
+                </div>
+            </div>
+            
+            <ul *ngIf="cartItems.length > 0" class="list-group">
+                <li class="item-carrito" *ngFor="let item of cartItems">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card">
+                                <div class="card-body item">
+                                    <app-cart-item [cartItem]="item"></app-cart-item>
+                                    <button class="btn btn-light btn-pq float-right">Eliminar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="total">
+            <div class="card card-carrito">
+                <div class="card-body">
+                    <span class="titulo-carrito">Resúmen de la orden</span>
+                    <div class="row espacio">
+                        <div class="col">
+                            <span>Sub-total productos</span>
+                        </div>
+                        <div class="col text-right">
+                            {{cartTotal | currency: "$"}}
+                        </div>
+                    </div>
+                    <div class="row espacio">
+                        <button class="btn btn-block btn-primario">Finalizar compra</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

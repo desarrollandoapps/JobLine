@@ -11,18 +11,18 @@
                 <li class="nav-item">
                     <a class="nav-link" routerLink="home">Inicio</a>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown"  *ngIf="showCat">
                     <a class="nav-link dropdown-toggle" href="#" id="categorias" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categorías</a>
                     <div class="dropdown-menu" aria-labelledby="categorias">
                       <a class="dropdown-item" (click)="filtrarPorCategoria( '' )">TODAS</a>
                       <a class="dropdown-item" *ngFor="let categoria of categorias" (click)="filtrarPorCategoria( categoria.id )" > {{categoria.nombre}} </a>
                     </div>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="showCat">
                     <a class="nav-link" routerLink="carrito"><i class="fas fa-shopping-cart"></i><span class="badge badge-warning">{{cantProd}}</span></a>
                 </li>
             </ul>
-            <form class="form-inline">
+            <form class="form-inline" *ngIf="showCat">
                 <input #textoBuscar [(ngModel)]="valBuscar" value="{{valBuscar}}" class="form-control" type="text" placeholder="Buscar productos" aria-label="Search" [ngModelOptions]="{standalone:true}">
                 <button class="searchbtn" (click)="buscarItem(textoBuscar)">Buscar</button>
                 <img src="../../../../assets/img/nav/delete.jpg" alt="Limpiar" class="rounded-circle" (click)="buscarItem(null)">

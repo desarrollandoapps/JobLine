@@ -3,6 +3,8 @@ import { faFacebookF } from '@fortawesome/free-brands-svg-icons';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { AuthTokenService } from './services/auth-token.service';
+import { CarouselService } from './services/carousel.service';
+import { ParsedVariable } from '@angular/compiler';
 
 @Component({
   selector: 'app-root',
@@ -20,8 +22,14 @@ export class AppComponent {
 
   valorFiltro = '';
   cargar: boolean = false;
+  carousel: boolean = true;
 
-  constructor(private authToken: AuthTokenService) {
+  constructor(private authToken: AuthTokenService, private carouselService: CarouselService) {
+
+    this.carouselService.getCarousel().subscribe((valor: boolean) => {
+      this.carousel = valor
+    })
+
     if (localStorage.getItem('token'))
     {
       this.cargar = true;

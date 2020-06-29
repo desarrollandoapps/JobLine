@@ -1,5 +1,30 @@
-<div class="cart-item">
-    <span>{{cartItem.nombre}}</span> x 
-    <span>{{cartItem.cantidad}}</span>: 
-    <strong>{{ (cartItem.cantidad * cartItem.precioSu) | currency:"$" }}</strong>
+<div class="">
+    <div class="">
+        <div class="h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-md-2">
+                    <img src="http://joblinefree.com/Archivos/{{cartItem.foto}}" alt="Producto" class="img-prod">
+                </div>
+                <div class="col-md-6">
+                    <span class="item-title">{{cartItem.nombre}}</span><br>
+                </div>
+                <div class="col-md-2">
+                    <div class="row justify-content-center ">
+                        <span>Precio Unitario</span>
+                    </div>
+                    <div class="row justify-content-center ">
+                        <span class="precio">{{cartItem.precioSu | currency:"$"}}</span>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="row justify-content-center ">
+                        <span>Cantidad</span>
+                    </div>
+                    <div class="row justify-content-center ">
+                        <span class="cantidad">{{cartItem.cantidad}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

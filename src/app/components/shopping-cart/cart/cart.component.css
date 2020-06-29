@@ -1,0 +1,38 @@
+.carrito {
+    margin: 2rem auto 2rem;
+}
+.card-carrito {
+    margin: 15px 0px;
+}
+.titulo-carrito {
+    padding: 35px 0px;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+.item-carrito {
+    margin: 15px 0px;
+    display: block;
+}
+.total {
+    margin: 2rem auto 2rem;
+}
+
+.btn-primario {
+    color: white;
+    background-color: rgb(199, 58, 63);;
+}
+.espacio {
+    margin-top: 3rem;
+}
+.item {
+    padding: 30px 60px 30px 40px;
+}
+.item-title {
+    font-weight: 400;
+    font-size: 16px;
+    color: #333;
+}
+.btn-pq {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+}

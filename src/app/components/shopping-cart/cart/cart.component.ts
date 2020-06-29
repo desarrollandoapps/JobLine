@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MessengerService } from 'src/app/services/messenger.service';
 import { Producto } from 'src/app/interfaces/producto';
+import { CarouselService } from 'src/app/services/carousel.service';
 
 @Component({
   selector: 'app-cart',
@@ -12,13 +13,18 @@ export class CartComponent implements OnInit {
   cartItems = [];
   cartTotal = 0;
 
-  constructor(private msg: MessengerService) { }
+  //TODO: Unir productos repetidos
+
+  constructor(private msg: MessengerService, private carouselService: CarouselService) { 
+    this.carouselService.updateCarouselMessage(false)
+  }
 
   ngOnInit(): void {
     this.msg.getMsg().subscribe((producto: Producto) => {
       this.addProductToCart(producto);
     });
     this.obtenerProductos();
+    
   }
 
   obtenerProductos()
@@ -35,19 +41,41 @@ export class CartComponent implements OnInit {
       var precios = precioStr.split('|')
       var fotoStr = localStorage.getItem('fotoArt')
       var fotos = fotoStr.split('|')
+      var cantidadStr = localStorage.getItem('cantidad')
+      var cantidad = cantidadStr.split('|')
 
       for (var i = 0; i < codigos.length; i++)
       {
-        this.cartItems.push({
-          id: codigos[i],
-          cantidad: 1,
-          nombre: nombres[i],
-          precioSu: precios[i],
-          foto: fotos[i]
-        });
-      }
+        var existe:boolean = this.existeProducto(codigos[i], parseInt(cantidad[i]))
 
+        if (!existe)
+        {
+          this.cartItems.push({
+            id: codigos[i],
+            cantidad: cantidad[i],
+            nombre: nombres[i],
+            precioSu: precios[i],
+            foto: fotos[i]
+          });
+        }        
+      }
+      this.cartTotal = 0;
+      this.cartItems.forEach(item => {
+        this.cartTotal += item.cantidad * item.precioSu;
+      });
     }
+  }
+
+  existeProducto(codigo: string, cantidad:number): boolean {
+    let existe = false;
+    for ( let i in this.cartItems ) {
+      if ( this.cartItems[i].id === codigo ) {
+        this.cartItems[i].cantidad = parseInt(this.cartItems[i].cantidad) + cantidad;
+        existe = true;
+        return existe;
+      }
+    }
+    return existe;
   }
 
   addProductToCart(producto: Producto) {
@@ -73,11 +101,12 @@ export class CartComponent implements OnInit {
     let existe = false;
     for ( let i in this.cartItems ) {
       if ( this.cartItems[i].id === producto.id ) {
-        this.cartItems[i].cantidad++;
+        this.cartItems[i].cantidad++ ;
         existe = true;
         return existe;
       }
     }
     return existe;
   }
+
 }

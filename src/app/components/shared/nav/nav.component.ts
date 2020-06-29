@@ -10,6 +10,7 @@ import { FiltrarServiceCategoria } from 'src/app/services/filtrarCategoria.servi
 import {ViewChild} from '@angular/core';
 import { MessengerService } from 'src/app/services/messenger.service';
 import { Producto } from 'src/app/interfaces/producto';
+import { CarouselService } from 'src/app/services/carousel.service';
 
 @Component({
   selector: 'app-nav',
@@ -24,6 +25,7 @@ export class NavComponent implements OnInit {
   valBuscar: string;
   valorCateg: string;
   cantProd: number;
+  showCat: boolean = true;
 
   @ViewChild('itemId') itemId;
 
@@ -32,16 +34,30 @@ export class NavComponent implements OnInit {
   API_ENDPOINT = 'http://joblinefree.com:98/api/categoria';
 
   categorias: Categoria[];
+  productos = new Array();
 
   constructor(private globals: Globals, private buscadorService: BuscadorService,
               private categoriaService: CategoriaService, private httpClient: HttpClient,
-              private filtrarServiceCategoria: FiltrarServiceCategoria, private msg: MessengerService ) {
+              private filtrarServiceCategoria: FiltrarServiceCategoria, private msg: MessengerService,
+              private carouselService: CarouselService ) {
+
     this.buscarSubject.subscribe(valor => this.valBuscar = valor);
     this.filtrarServiceCategoria.broadcast.subscribe( categ => this.valorCateg = categ );
+    
+    this.carouselService.getCarousel().subscribe((valor: boolean) => {
+      this.showCat = valor
+    })
 
     httpClient.get(this.API_ENDPOINT).subscribe((data: Categoria[]) => {
       this.categorias = data;
     });
+
+    this.msg.getMsg().subscribe((prods) => {
+      console.log('Cambio en productos')
+      this.productos.push(prods['Producto'])
+      this.cantProd = this.contar(this.productos);
+      console.log(this.cantProd);
+    })
 
     this.cantProd = this.contarProductos();
 
@@ -49,9 +65,6 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void {
     this.buscadorService.broadcast.subscribe(broadcast => this.valBuscar = broadcast);
-    this.msg.getMsg().subscribe((producto: Producto) => {
-      this.cantProd++
-    });
   }
 
   public buscarItem(buscarInput: HTMLInputElement)
@@ -77,13 +90,38 @@ export class NavComponent implements OnInit {
 
   public contarProductos(): number
   {
+    var productos = []
     if (localStorage.getItem('codigo'))
     {
       var productosStr = localStorage.getItem('codigo')
-      var productos = productosStr.split('|')
-      return productos.length
+      var productosFull = productosStr.split('|')
+
+      productos.push( productosFull[0] )
+
+      for (var i:number = 0; i < productosFull.length; i++) 
+      {
+        if( !productos.includes(productosFull[i]) )
+        {
+          productos.push(productosFull[i])
+        }        
+      }  
     }
-    return 0
+      return productos.length
   }
 
+  public contar(productosOrigen): number
+  {
+    var productos = []
+
+    productos.push( productosOrigen[0] )
+
+    for (var i:number = 0; i < productosOrigen.length; i++) 
+    {
+      if( !productos.includes(productosOrigen[i]) )
+      {
+        productos.push(productosOrigen[i])
+      }        
+    }  
+    return productos.length
+  }
 }
