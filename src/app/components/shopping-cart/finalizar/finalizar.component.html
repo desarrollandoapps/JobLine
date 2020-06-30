@@ -1,0 +1,73 @@
+<div class="mt-5 mb-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="titulo">Bienvenido a JobLineF</h1>
+                    <span class="subtitulo" *ngIf="!existeVendedor">Para continuar con su orden ingrese el código del referidor</span>
+                    <form [formGroup]="checkoutForm1" (ngSubmit)="onSubmit(checkoutForm1.value)" class="form-inline mt-3" *ngIf="!existeVendedor">
+                        <div class="form-group">
+                            <label class="sr-only" for="codReferidor">Código de referidor</label>
+                            <input type="text" formControlName="codReferidor" id="codReferidor" class="form-control mb-2 mr-sm-2" placeholder="Código de referidor">
+                            <button type="submit" class="btn mb-2 btn-primario">Continuar</button>
+                            <div *ngIf="errorMessage" class="error">
+                                {{errorMessage}}
+                            </div>
+                        </div>
+                    </form>
+                    <span class="subtitulo" *ngIf="existeVendedor">Está a solo 2 pasos de terminar su compra.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-8">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="titulo">Elija sus opciones de despacho</h1>
+                    <p>Seleccione el departamento y ciudad donde quiere despachar sus productos.</p>
+                    <form [formGroup]="checkoutForm2" (ngSubmit)="onSubmit(checkoutForm2)">
+                        
+                        <input type="hidden"  formControlName="codReferidor" [(ngModel)]="codigoReferidor">
+
+                        <div class="form-group">
+                            <label for="depto">Departamento</label>
+                            <select name="depto" class="custom-select" (change)="onSelectDepto($event.target.value)">
+                                <option value="" selected>Por favor seleccione un departamento</option>
+                                <option [value]="depto.Id" *ngFor="let depto of deptos">{{depto.Nombre}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ciudadId">Ciudad</label>
+                            <select ng-disabled="disabledCiudad" formControlName="ciudadId" id="ciudadId" class="custom-select">
+                                <option value="" selected>Por favor seleccione una ciudad</option>
+                                <option [value]="ciudad.Id" *ngFor="let ciudad of ciudades">{{ciudad.NOMBRE}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="direccion">Dirección</label>
+                            <input type="text" formControlName="direccion" id="direccion" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="nombreCli">Nombre</label>
+                            <input type="text" formControlName="nombreCli" id="nombreCli" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono</label>
+                            <input type="tel" formControlName="telefono" id="telefono" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" formControlName="email" id="email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primario btn-block" ng-disabled="true">Ir a pagar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-4"></div>
+    </div>
+</div>

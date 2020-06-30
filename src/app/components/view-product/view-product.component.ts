@@ -18,6 +18,11 @@ export class ViewProductComponent implements OnInit {
   constructor(private msg: MessengerService, private globals: Globals) { 
     this.producto = globals.producto;
     this.elementos = new Array();
+
+    if( !this.producto )
+    {
+      location.href = 'home'
+    }
   }
 
   ngOnInit(): void {

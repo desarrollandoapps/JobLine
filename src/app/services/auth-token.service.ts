@@ -10,7 +10,7 @@ export class AuthTokenService {
   API_ENDPOINT = 'http://joblinefree.com:98/api/Login/AuthWeb';
 
   constructor(private httpClient: HttpClient) { 
-    console.log(localStorage.getItem('token'));
+    // console.log(localStorage.getItem('token'));
     if (!localStorage.getItem('token')) {
       localStorage.removeItem('In');
     }
@@ -21,7 +21,7 @@ export class AuthTokenService {
     localStorage.setItem('In', 'in');
     this.httpClient.post(this.API_ENDPOINT, null, {responseType: 'text'}).subscribe(
       (val) => {
-          console.log("POST llamado exitosamente", val);
+          // console.log("POST llamado exitosamente", val);
           token = val;
           localStorage.setItem('token', token);
           var fecha = new Date();
@@ -30,9 +30,6 @@ export class AuthTokenService {
       },
       response => {
           console.log("Respuesta", response);
-      },
-      () => {
-          console.log("The POST observable is now completed.");
       }
     );
     return token;

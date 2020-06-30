@@ -5,6 +5,7 @@ import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { AuthTokenService } from './services/auth-token.service';
 import { CarouselService } from './services/carousel.service';
 import { ParsedVariable } from '@angular/compiler';
+import { CargarService } from './services/cargar.service';
 
 @Component({
   selector: 'app-root',
@@ -24,16 +25,21 @@ export class AppComponent {
   cargar: boolean = false;
   carousel: boolean = true;
 
-  constructor(private authToken: AuthTokenService, private carouselService: CarouselService) {
-
-    this.carouselService.getCarousel().subscribe((valor: boolean) => {
-      this.carousel = valor
-    })
-
+  constructor(private authToken: AuthTokenService, private carouselService: CarouselService,
+            private cargarService: CargarService) {
+    
     if (localStorage.getItem('token'))
     {
       this.cargar = true;
     }
+    
+  }
+
+  ngOnInit() {
+    this.carouselService.getCarousel().subscribe((valor: boolean) => {
+      this.carousel = valor
+    })
+
     if (localStorage.getItem('cargar'))
     {
       this.cargar = false;

@@ -1,0 +1,17 @@
+.titulo {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+.subtitulo {
+    color: #888888;
+}
+.btn-primario {
+    color: white;
+    background-color: rgb(199, 58, 63);;
+}
+.error{
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #dc3545;
+}

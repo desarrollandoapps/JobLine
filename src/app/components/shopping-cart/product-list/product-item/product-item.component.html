@@ -7,7 +7,8 @@
             <strong class="h4">{{ producto.precioSu | currency:"$":'symbol':'3.0' }}</strong>
         </p>
         <p class="card-text muted">
-            {{ producto.nombre.length > 40 ? (producto.nombre | slice:0:40) + '...':(producto.nombre) }}</p>
+            {{ producto.nombre.length > 25 ? (producto.nombre | slice:0:25) + '...' : producto.nombre}}
+        </p>
         <div class="d-flex justify-content-between align-items-center">
             <div class="btn-group">
                 <button type="button" class="btn btn-sm btn-primary btn-product negro" (click)="handleAddToCart()">Añadir al carrito</button>

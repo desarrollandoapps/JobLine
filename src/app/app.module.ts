@@ -31,13 +31,15 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { ViewProductComponent } from './components/view-product/view-product.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { FinalizarComponent } from './components/shopping-cart/finalizar/finalizar.component';
 
 const routes: Route[] = [
   {path: '', component: ShoppingCartComponent},
   {path: 'home', component: ShoppingCartComponent},
   {path: 'privacidad', component: PoliticasComponent},
   {path: 'producto', component: ViewProductComponent},
-  {path: 'carrito', component: CartComponent}
+  {path: 'carrito', component: CartComponent},
+  {path: 'finalizar', component: FinalizarComponent}
 ];
 
 
@@ -57,10 +59,11 @@ const routes: Route[] = [
     PoliticasComponent,
     FilterPipe,
     ViewProductComponent,
+    FinalizarComponent,
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'}),
     AppRoutingModule,
     BrowserAnimationsModule,
     CarouselModule,
@@ -70,6 +73,7 @@ const routes: Route[] = [
     FormsModule,
     NgxPaginationModule
   ],
+  exports: [RouterModule],
   providers: [
     { 
       provide: HTTP_INTERCEPTORS,

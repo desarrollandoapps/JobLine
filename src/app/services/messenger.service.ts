@@ -12,7 +12,6 @@ export class MessengerService {
   constructor() { }
 
   sendMsg(producto: Producto, cantidad: number) {
-    console.log('Entra a sendMsg');
     
     this.subject.next({Producto: producto, Cantidad: cantidad}) //Triggering an event
 
@@ -41,8 +40,14 @@ export class MessengerService {
     }
   }
 
-  getMsg() {
-    console.log('Entra a getMsg');
+  getMsg()
+  {
     return this.subject.asObservable()
   }
+
+  sendDeleteMsg()
+  {
+    this.subject.next()
+  }
+
 }

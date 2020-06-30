@@ -21,7 +21,7 @@
                             <div class="card">
                                 <div class="card-body item">
                                     <app-cart-item [cartItem]="item"></app-cart-item>
-                                    <button class="btn btn-light btn-pq float-right">Eliminar</button>
+                                    <button class="btn btn-light btn-pq float-right" (click)="borrarProducto(item)">Eliminar</button>
                                 </div>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     <div class="row espacio">
-                        <button class="btn btn-block btn-primario">Finalizar compra</button>
+                        <a routerLink="/finalizar" class="btn btn-block btn-primario">Finalizar compra</a>
                     </div>
                 </div>
             </div>
