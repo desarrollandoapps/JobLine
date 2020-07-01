@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Departamento } from 'src/app/interfaces/departamento'
 import { Ciudad } from 'src/app/interfaces/ciudad';
 import Swal from 'sweetalert2';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-finalizar',
@@ -18,12 +19,12 @@ export class FinalizarComponent implements OnInit {
   API_ENDPOINT_CIUDAD = "http://joblinefree.com:98/api/";
 
   form: FormGroup;
-  
+
   productos;
   checkoutForm1;
   checkoutForm2;
   errorMessage;
-  codigoReferidor = '';
+  codigoReferidor = 'Appinc';
   existeVendedor: boolean = false;
   disabledCiudad: boolean = false;
   deptos: Departamento[] = [{Id:1, Nombre:'Amazonas'}, {Id:2, Nombre:'Tolima'}];
@@ -34,7 +35,7 @@ export class FinalizarComponent implements OnInit {
   numero;
 
   constructor(private carouselService: CarouselService, private formBuilder: FormBuilder,
-    private httpClient: HttpClient) { 
+    private httpClient: HttpClient) {
     this.carouselService.updateCarouselMessage(false);
 
     this.checkoutForm1 = this.formBuilder.group({
@@ -92,13 +93,49 @@ export class FinalizarComponent implements OnInit {
 
   onSubmit(datosForm) {
     //Obtener consecutivos
-    console.log(datosForm);
-    var formData: any = new FormData();
-    formData.append("ciudadId", this.form.get('ciudadId').value);
-    
+    let cualquierCosa = {
+      id: 168,
+      personaId: 32,
+      codigo: "CM1",
+      numero: 23,
+      ciudadId: 73001,
+      direccion: 'mirador de yerbabuena',
+      fPedido: "2020-05-26T16:45:34+00:00",
+      fEnvio: null,
+      estado: "0",
+      vrTotal: 125900.00,
+      codTransac: "",
+      estadoTransac: "",
+      proveEnvio: "",
+      proveeGuia: "",
+      nombreCli: 'Jose',
+      telefono: '305',
+      email: 'jose@gmail.com',
+      codReferidor: 'Appinc',
+      persona: null,
+      items: [
+        {
+            "id": 0,
+            "documentoId": 0,
+            "articuloId": 24,
+            "nombreArt": "Auriculares Bluetooth TaoTronics inalámbricos TWS para deporte TT-BH053",
+            "cantidad": 1,
+            "dcto": 0.00,
+            "vrUnitario": 125900.00,
+            "vrTotal": 125900.00
+        }
+      ]
+    };
+    console.log( 'cualquierCosa: ' + cualquierCosa );
+    console.log('Json: ' + datosForm ) ;
+    // var formData: any = new FormData();
+    // formData.append("ciudadId", this.form.get('ciudadId').value);
+
+    console.log( 'datosForm.codigoReferidor: ' + datosForm.codigoReferidor );
+
     if (datosForm.codigoReferidor !== '')
     {
-      this.httpClient.post(this.API_ENDPOINT_DOC, datosForm).subscribe(
+      this.httpClient.post(this.API_ENDPOINT_DOC, cualquierCosa).subscribe(
         (documento) => {
           console.log("Documento", documento);
         },
@@ -119,11 +156,11 @@ export class FinalizarComponent implements OnInit {
             this.existeVendedor = true
           }
         }
-      )
-  
+      );
+
       // this.productos = this.cartService.clearCart();
       // this.checkoutForm1.reset();
-  
+
       console.warn('Su orden ha sido enviada.', datosForm);
     }
     else {
@@ -134,7 +171,7 @@ export class FinalizarComponent implements OnInit {
         text: '¡Debe ingresar el código del referidor!'
       })
     }
-    
+
   }
 
 }
