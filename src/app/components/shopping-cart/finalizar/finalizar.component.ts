@@ -15,21 +15,21 @@ import { JsonPipe } from '@angular/common';
 export class FinalizarComponent implements OnInit {
 
   API_ENDPOINT_DOC = "http://joblinefree.com:98/api/Documento";
-  API_ENDPOINT_DEPTO = "http://joblinefree.com:98/api/";
-  API_ENDPOINT_CIUDAD = "http://joblinefree.com:98/api/";
+  API_ENDPOINT_DEPTO = "http://joblinefree.com:98/api/Dpto";
+  API_ENDPOINT_CIUDADES = "http://joblinefree.com:98/api/Ciudad";
   API_ENDPOINT_REFERIDOR = "http://joblinefree.com:98/api/Persona/Referidor?CodRef="
 
   form: FormGroup;
 
   productos;
   checkoutForm1;
-  checkoutForm2;
+  checkoutForm2: FormGroup;
   errorMessage;
   codigoReferidor = 'Appinc';
   existeVendedor: boolean = false;
   disabledCiudad: boolean = false;
-  deptos: Departamento[] = [{Id:1, Nombre:'Amazonas'}, {Id:2, Nombre:'Tolima'}];
-  ciudadesFull: Ciudad[] = [{Id:1, NOMBRE:'Leticia', DptoId:1}, {Id:73001, NOMBRE:'Ibagué', DptoId:2}]
+  deptos: Departamento[];
+  ciudadesFull: Ciudad[];
   ciudades: Ciudad[];
 
   id;
@@ -80,17 +80,20 @@ export class FinalizarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //TODO: Obtener departamentos
-    // this.httpClient.get(this.API_ENDPOINT_DEPTO).subscribe((data: Departamento[]) => {
-    //   this.deptos = data;
-    // });
-    //TODO: Obtener ciudades
+    //Obtener departamentos
+    this.httpClient.get(this.API_ENDPOINT_DEPTO).subscribe((data: Departamento[]) => {
+      this.deptos = data;
+    });
+    //Obtener ciudades
+    this.httpClient.get(this.API_ENDPOINT_CIUDADES).subscribe((data: Ciudad[]) => {
+      this.ciudadesFull = data;
+    });
     //TODO: Obtener los productos
   }
 
   onSelectDepto(id: number):void
   {
-    this.ciudades = this.ciudadesFull.filter(ciudad => ciudad.DptoId == id)
+    this.ciudades = this.ciudadesFull.filter(ciudad => ciudad.dptoId == id)
   }
 
   onSubmit(datosForm) {

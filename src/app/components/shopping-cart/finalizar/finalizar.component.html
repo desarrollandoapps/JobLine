@@ -35,14 +35,14 @@
                             <label for="depto">Departamento</label>
                             <select name="depto" class="custom-select" (change)="onSelectDepto($event.target.value)">
                                 <option value="" selected>Por favor seleccione un departamento</option>
-                                <option [value]="depto.Id" *ngFor="let depto of deptos">{{depto.Nombre}}</option>
+                                <option [value]="depto.id" *ngFor="let depto of deptos">{{depto.nombre}}</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="ciudadId">Ciudad</label>
                             <select ng-disabled="disabledCiudad" formControlName="ciudadId" id="ciudadId" class="custom-select">
                                 <option value="" selected>Por favor seleccione una ciudad</option>
-                                <option [value]="ciudad.Id" *ngFor="let ciudad of ciudades">{{ciudad.NOMBRE}}</option>
+                                <option [value]="ciudad.id" *ngFor="let ciudad of ciudades">{{ciudad.nombre}}</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -59,10 +59,10 @@
                         </div>
                         <div class="form-group">
                             <label for="email">Correo electrónico</label>
-                            <input type="email" formControlName="email" id="email" class="form-control">
+                            <input type="email" formControlName="email" id="email" class="form-control" [value]="a">
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primario btn-block" ng-disabled="true">Ir a pagar</button>
+                            <button type="submit" class="btn btn-primario btn-block" [disabled]="!existeVendedor">Ir a pagar</button>
                         </div>
                     </form>
                 </div>
