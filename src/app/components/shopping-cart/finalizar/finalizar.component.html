@@ -5,7 +5,7 @@
                 <div class="card-body">
                     <h1 class="titulo">Bienvenido a JobLineF</h1>
                     <span class="subtitulo" *ngIf="!existeVendedor">Para continuar con su orden ingrese el código del referidor</span>
-                    <form [formGroup]="checkoutForm1" (ngSubmit)="onSubmit(checkoutForm1.value)" class="form-inline mt-3" *ngIf="!existeVendedor">
+                    <form [formGroup]="checkoutForm1" (ngSubmit)="validarReferidor(checkoutForm1.value)" class="form-inline mt-3" *ngIf="!existeVendedor">
                         <div class="form-group">
                             <label class="sr-only" for="codReferidor">Código de referidor</label>
                             <input type="text" formControlName="codReferidor" id="codReferidor" class="form-control mb-2 mr-sm-2" placeholder="Código de referidor">
@@ -27,8 +27,8 @@
                 <div class="card-body">
                     <h1 class="titulo">Elija sus opciones de despacho</h1>
                     <p>Seleccione el departamento y ciudad donde quiere despachar sus productos.</p>
-                    <form [formGroup]="checkoutForm2" (ngSubmit)="onSubmit(checkoutForm2)">
-                        
+                    <form [formGroup]="checkoutForm2" (ngSubmit)="onSubmit(checkoutForm2.value)">
+
                         <input type="hidden"  formControlName="codReferidor" [(ngModel)]="codigoReferidor">
 
                         <div class="form-group">
@@ -71,3 +71,4 @@
         <div class="col-4"></div>
     </div>
 </div>
+

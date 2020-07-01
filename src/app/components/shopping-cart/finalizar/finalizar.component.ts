@@ -17,6 +17,7 @@ export class FinalizarComponent implements OnInit {
   API_ENDPOINT_DOC = "http://joblinefree.com:98/api/Documento";
   API_ENDPOINT_DEPTO = "http://joblinefree.com:98/api/";
   API_ENDPOINT_CIUDAD = "http://joblinefree.com:98/api/";
+  API_ENDPOINT_REFERIDOR = "http://joblinefree.com:98/api/Persona/Referidor?CodRef="
 
   form: FormGroup;
 
@@ -33,6 +34,7 @@ export class FinalizarComponent implements OnInit {
 
   id;
   numero;
+  personaId;
 
   constructor(private carouselService: CarouselService, private formBuilder: FormBuilder,
     private httpClient: HttpClient) {
@@ -93,25 +95,29 @@ export class FinalizarComponent implements OnInit {
 
   onSubmit(datosForm) {
     //Obtener consecutivos
-    let cualquierCosa = {
+
+    let fecha = new Date().toISOString();
+    fecha = fecha.substring(0, 19);
+
+    let documentoInicial = {
       id: 168,
-      personaId: 32,
-      codigo: "CM1",
+      personaId: this.personaId,
+      codigo: 'CM1',
       numero: 23,
-      ciudadId: 73001,
-      direccion: 'mirador de yerbabuena',
-      fPedido: "2020-05-26T16:45:34+00:00",
+      ciudadId: parseInt(datosForm.ciudadId),
+      direccion: datosForm.direccion,
+      fPedido: fecha,
       fEnvio: null,
-      estado: "0",
+      estado: '0',
       vrTotal: 125900.00,
       codTransac: "",
       estadoTransac: "",
       proveEnvio: "",
       proveeGuia: "",
-      nombreCli: 'Jose',
-      telefono: '305',
-      email: 'jose@gmail.com',
-      codReferidor: 'Appinc',
+      nombreCli: datosForm.nombreCli,
+      telefono: datosForm.telefono,
+      email: datosForm.email,
+      codReferidor: this.codigoReferidor,
       persona: null,
       items: [
         {
@@ -126,7 +132,7 @@ export class FinalizarComponent implements OnInit {
         }
       ]
     };
-    console.log( 'cualquierCosa: ' + cualquierCosa );
+    console.log( 'documentoInicial: ' + documentoInicial );
     console.log('Json: ' + datosForm ) ;
     // var formData: any = new FormData();
     // formData.append("ciudadId", this.form.get('ciudadId').value);
@@ -135,26 +141,14 @@ export class FinalizarComponent implements OnInit {
 
     if (datosForm.codigoReferidor !== '')
     {
-      this.httpClient.post(this.API_ENDPOINT_DOC, cualquierCosa).subscribe(
+      this.httpClient.post(this.API_ENDPOINT_DOC, documentoInicial).subscribe(
         (documento) => {
-          console.log("Documento", documento);
+          console.log('Documento: ' + documento);
         },
         response => {
-          this.errorMessage = ''
+          this.errorMessage = '';
           console.log(response.error)
-          if(response.error.Message === "ERROR: Vendedor no existe") {
-            this.errorMessage = response.error.Message;
-          }
-          else if(response.error.Message === "ERROR: No envio datos del vendedor") {
-            this.errorMessage = response.error.Message;
-          }
-          else if(response.error.title === "One or more validation errors occurred.") {
-            this.errorMessage = 'Debe ingresar todos los campos';
-          }
-          else {
-            this.codigoReferidor = datosForm.codReferidor
-            this.existeVendedor = true
-          }
+
         }
       );
 
@@ -172,6 +166,35 @@ export class FinalizarComponent implements OnInit {
       })
     }
 
+  }
+
+  validarReferidor( datosForm ) {
+
+    console.log( 'datosForm.codReferidor' + datosForm.codReferidor );
+    this.errorMessage = '';
+
+    if (datosForm.codReferidor !== '')
+    {
+      this.httpClient.get(this.API_ENDPOINT_REFERIDOR + datosForm.codReferidor ).subscribe(
+        (personaId) => {
+          console.log( 'personaId: ' + personaId );
+          if( personaId !== 0 ) {
+            this.personaId = personaId;
+            this.codigoReferidor = datosForm.codReferidor;
+            this.existeVendedor = true;
+          }
+          else {
+            this.errorMessage = 'No existe el referidor con el código dado';
+          }
+        });
+    }
+    else {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Ocurrió un error',
+        text: '¡Debe ingresar el código del referidor!'
+      });
+    }
   }
 
 }
