@@ -9,7 +9,6 @@ import { CategoriaService } from 'src/app/services/categoria.service';
 import { FiltrarServiceCategoria } from 'src/app/services/filtrarCategoria.service';
 import {ViewChild} from '@angular/core';
 import { MessengerService } from 'src/app/services/messenger.service';
-import { Producto } from 'src/app/interfaces/producto';
 import { CarouselService } from 'src/app/services/carousel.service';
 
 @Component({

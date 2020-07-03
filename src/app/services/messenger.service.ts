@@ -17,7 +17,7 @@ export class MessengerService {
 
     if (!localStorage.getItem('codigo'))
     {
-      localStorage.setItem('codigo', producto.codigo)
+      localStorage.setItem('codigo', '' + producto.id)
       localStorage.setItem('nombre', producto.nombre)
       localStorage.setItem('detalle', producto.detalle)
       localStorage.setItem('precioSu', '' + producto.precioSu)
@@ -25,7 +25,7 @@ export class MessengerService {
       localStorage.setItem('cantidad', '' + cantidad)
     } 
     else {
-      var codigo = localStorage.getItem('codigo') + '|' + producto.codigo
+      var codigo = localStorage.getItem('codigo') + '|' + producto.id
       localStorage.setItem('codigo', codigo)
       var nombre = localStorage.getItem('nombre') + '|' + producto.nombre
       localStorage.setItem('nombre', nombre)
