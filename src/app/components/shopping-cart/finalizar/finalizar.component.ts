@@ -28,7 +28,7 @@ export class FinalizarComponent implements OnInit {
   checkoutForm1;
   checkoutForm2: FormGroup;
   errorMessage;
-  codigoReferidor = 'Appinc';
+  codigoReferidor = '';
   existeVendedor: boolean = false;
   disabledCiudad: boolean = false;
   deptos: Departamento[];
@@ -48,16 +48,11 @@ export class FinalizarComponent implements OnInit {
     });
 
     this.checkoutForm2 = this.formBuilder.group({
-      // id: 168,
       personaId: new FormControl('32'),
       codigo: new FormControl('CM1'),
-      // numero: 23,
       ciudadId: new FormControl('', [Validators.required]),
       direccion: new FormControl('', [Validators.required]),
-      // fPedido: "2020-07-01T16:45:34+00:00",
-      // fEnvio: null,
       estado: new FormControl('0'),
-      // vrTotal: 125900.00,
       codTransac: new FormControl(''),
       estadoTransac: new FormControl(''),
       proveEnvio: new FormControl(''),
@@ -66,19 +61,6 @@ export class FinalizarComponent implements OnInit {
       telefono: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
       codReferidor: new FormControl(''),
-      // persona: null,
-      // items: [
-      //   {
-      //       "id": 0,
-      //       "documentoId": 0,
-      //       "articuloId": 24,
-      //       "nombreArt": "Auriculares Bluetooth TaoTronics inalámbricos TWS para deporte TT-BH053",
-      //       "cantidad": 1,
-      //       "dcto": 0.00,
-      //       "vrUnitario": 125900.00,
-      //       "vrTotal": 125900.00
-      //   }
-      // ]
     });
   }
 
@@ -86,7 +68,17 @@ export class FinalizarComponent implements OnInit {
     //Obtener departamentos
     this.httpClient.get(this.API_ENDPOINT_DEPTO).subscribe((data: Departamento[]) => {
       this.deptos = data;
+      this.deptos = this.deptos.sort(function (a, b) {
+        if (a.nombre > b.nombre) {
+          return 1;
+        }
+        if (a.nombre < b.nombre) {
+          return -1;
+        }
+        return 0;
+      });
     });
+
     //Obtener ciudades
     this.httpClient.get(this.API_ENDPOINT_CIUDADES).subscribe((data: Ciudad[]) => {
       this.ciudadesFull = data;
