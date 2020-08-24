@@ -20,12 +20,21 @@ export class ProductItemComponent implements OnInit {
   }
 
   handleAddToCart() {
-    this.msg.sendMsg(this.producto, 1)
-    Swal.fire(
-      'Ha agregado un producto al carrito de compras',
-      this.producto.nombre,
-      'success'
-    )
+    
+    if (this.msg.sendMsg(this.producto, 1))
+    {
+      Swal.fire(
+        'Ha agregado un producto al carrito de compras',
+        this.producto.nombre,
+        'success'
+      )
+    } else {
+      Swal.fire(
+        'No hay sufiente existencia de productos',
+        this.producto.nombre,
+        'error'
+      )
+    }
   }
 
   public cargarProducto(producto: Producto)

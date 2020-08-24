@@ -35,13 +35,20 @@ export class ViewProductComponent implements OnInit {
   }
 
   handleAddToCart() {
-    console.log('Cantidad: ' + this.cantidad);
-    this.msg.sendMsg(this.producto, this.cantidad)
-    Swal.fire(
-      'Ha agregado un producto al carrito de compras',
-      this.producto.nombre,
-      'success'
-    )
+    if (this.msg.sendMsg(this.producto, this.cantidad))
+    {
+      Swal.fire(
+        'Ha agregado un producto al carrito de compras',
+        this.producto.nombre,
+        'success'
+      )
+    } else {
+      Swal.fire(
+        'No hay sufiente existencia de productos',
+        this.producto.nombre,
+        'error'
+      )
+    }
   }
 
 }

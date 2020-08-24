@@ -4,6 +4,7 @@ import { Producto } from 'src/app/interfaces/producto';
 import { CarouselService } from 'src/app/services/carousel.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { LocalService } from 'src/app/services/local.service';
 
 @Component({
   selector: 'app-cart',
@@ -16,7 +17,7 @@ export class CartComponent implements OnInit {
   cartTotal = 0;
 
   constructor(private msg: MessengerService, private carouselService: CarouselService,
-              private router: Router) { 
+              private router: Router, private localService: LocalService) { 
     this.carouselService.updateCarouselMessage(false)
   }
 
@@ -32,19 +33,19 @@ export class CartComponent implements OnInit {
 
   obtenerProductos()
   {
-    if (localStorage.getItem('codigo'))
+    if (this.localService.getItem('codigo'))
     {
-      var codigosStr = localStorage.getItem('codigo')
+      var codigosStr = this.localService.getItem('codigo')
       var codigos = codigosStr.split('|')
-      var nombresStr = localStorage.getItem('nombre')
+      var nombresStr = this.localService.getItem('nombre')
       var nombres = nombresStr.split('|')
-      var detalleStr = localStorage.getItem('detalle')
+      var detalleStr = this.localService.getItem('detalle')
       var detalles = detalleStr.split('|')
-      var precioStr = localStorage.getItem('precioSu')
+      var precioStr = this.localService.getItem('precioSu')
       var precios = precioStr.split('|')
-      var fotoStr = localStorage.getItem('fotoArt')
+      var fotoStr = this.localService.getItem('fotoArt')
       var fotos = fotoStr.split('|')
-      var cantidadStr = localStorage.getItem('cantidad')
+      var cantidadStr = this.localService.getItem('cantidad')
       var cantidad = cantidadStr.split('|')
 
       for (var i = 0; i < codigos.length; i++)
@@ -140,17 +141,17 @@ export class CartComponent implements OnInit {
   eliminarProducto(item):void {
     console.log(item);
 
-    var codigosStr = localStorage.getItem('codigo')
+    var codigosStr = this.localService.getItem('codigo')
     var codigos = codigosStr.split('|')
-    var nombresStr = localStorage.getItem('nombre')
+    var nombresStr = this.localService.getItem('nombre')
     var nombres = nombresStr.split('|')
-    var cantidadesStr = localStorage.getItem('cantidad')
+    var cantidadesStr = this.localService.getItem('cantidad')
     var cantidades = cantidadesStr.split('|')
-    var descripcionesStr = localStorage.getItem('detalle')
+    var descripcionesStr = this.localService.getItem('detalle')
     var descripciones = descripcionesStr.split('|')
-    var preciosStr = localStorage.getItem('precioSu')
+    var preciosStr = this.localService.getItem('precioSu')
     var precios = preciosStr.split('|')
-    var fotosStr = localStorage.getItem('fotoArt')
+    var fotosStr = this.localService.getItem('fotoArt')
     var fotos = fotosStr.split('|')
 
     var posicion = this.buscarTodosProductos(item.id)
@@ -167,30 +168,30 @@ export class CartComponent implements OnInit {
         precios.splice(pos, 1)
         fotos.splice(pos, 1)
         
-        localStorage.removeItem('codigo')
-        localStorage.removeItem('nombre')
-        localStorage.removeItem('cantidad')
-        localStorage.removeItem('detalle')
-        localStorage.removeItem('precioSu')
-        localStorage.removeItem('fotoArt')
+        this.localService.removeItem('codigo')
+        this.localService.removeItem('nombre')
+        this.localService.removeItem('cantidad')
+        this.localService.removeItem('detalle')
+        this.localService.removeItem('precioSu')
+        this.localService.removeItem('fotoArt')
         for(var i:number = 0; i < codigos.length; i++) 
         {
-          if (localStorage.getItem('codigo') === null)
+          if (this.localService.getItem('codigo') === null)
           {
-            localStorage.setItem('codigo', codigos[i])
-            localStorage.setItem('nombre', nombres[i])
-            localStorage.setItem('cantidad', cantidades[i])
-            localStorage.setItem('detalle', descripciones[i])
-            localStorage.setItem('precioSu', precios[i])
-            localStorage.setItem('fotoArt', fotos[i])
+            this.localService.setItem('codigo', codigos[i])
+            this.localService.setItem('nombre', nombres[i])
+            this.localService.setItem('cantidad', cantidades[i])
+            this.localService.setItem('detalle', descripciones[i])
+            this.localService.setItem('precioSu', precios[i])
+            this.localService.setItem('fotoArt', fotos[i])
           }
           else {
-            localStorage.setItem('codigo', localStorage.getItem('codigo') + '|' + codigos[i])
-            localStorage.setItem('nombre', localStorage.getItem('nombre') + '|' + nombres[i])
-            localStorage.setItem('cantidad', localStorage.getItem('cantidad') + '|' + cantidades[i])
-            localStorage.setItem('detalle', localStorage.getItem('detalle') + '|' + descripciones[i])
-            localStorage.setItem('precioSu', localStorage.getItem('precioSu') + '|' + precios[i])
-            localStorage.setItem('fotoArt', localStorage.getItem('fotoArt') + '|' + fotos[i])
+            this.localService.setItem('codigo', this.localService.getItem('codigo') + '|' + codigos[i])
+            this.localService.setItem('nombre', this.localService.getItem('nombre') + '|' + nombres[i])
+            this.localService.setItem('cantidad', this.localService.getItem('cantidad') + '|' + cantidades[i])
+            this.localService.setItem('detalle', this.localService.getItem('detalle') + '|' + descripciones[i])
+            this.localService.setItem('precioSu', this.localService.getItem('precioSu') + '|' + precios[i])
+            this.localService.setItem('fotoArt', this.localService.getItem('fotoArt') + '|' + fotos[i])
           }
         }
       });
@@ -200,7 +201,7 @@ export class CartComponent implements OnInit {
   buscarTodosProductos(codigo:string): number[] {
     var posiciones = []
 
-    var codigosStr = localStorage.getItem('codigo')
+    var codigosStr = this.localService.getItem('codigo')
     var codigosFull = codigosStr.split('|')
 
     for(var i:number = 0; i < codigosFull.length; i++)
@@ -215,7 +216,7 @@ export class CartComponent implements OnInit {
 
   buscarProducto(codigo:string): number {
     var posicion = -1
-    var codigosStr = localStorage.getItem('codigo')
+    var codigosStr = this.localService.getItem('codigo')
     var codigosFull = codigosStr.split('|')
 
     for(var i:number = 0; i < codigosFull.length; i++)

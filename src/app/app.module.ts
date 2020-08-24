@@ -35,6 +35,7 @@ import { FinalizarComponent } from './components/shopping-cart/finalizar/finaliz
 
 const routes: Route[] = [
   {path: '', component: ShoppingCartComponent},
+  {path: '*', component: ShoppingCartComponent},
   {path: 'home', component: ShoppingCartComponent},
   {path: 'privacidad', component: PoliticasComponent},
   {path: 'producto', component: ViewProductComponent},

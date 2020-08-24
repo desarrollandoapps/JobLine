@@ -16,10 +16,10 @@ export class AuthInterceptorService implements HttpInterceptor {
 
     if (req.url !== 'https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu')
     {
-
       this.token = localStorage.getItem('token');
+      // alert(localStorage.getItem('In'));
       
-      if ( localStorage.getItem('token') === null && !localStorage.getItem('In') ) 
+      if ( localStorage.getItem('token') === null && localStorage.getItem('In') === null ) 
       {
         this.authTokenService.getToken();
       }

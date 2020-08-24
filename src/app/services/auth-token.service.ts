@@ -7,7 +7,7 @@ import { tokenName } from '@angular/compiler';
 })
 export class AuthTokenService {
 
-  API_ENDPOINT = 'http://joblinefree.com:98/api/Login/AuthWeb';
+  API_ENDPOINT = 'http://35.224.231.248:98/api/Login/AuthWeb';
 
   constructor(private httpClient: HttpClient) { 
     // console.log(localStorage.getItem('token'));

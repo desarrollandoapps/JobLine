@@ -21,7 +21,7 @@ export class ProductListComponent implements OnInit {
   valorHasta: string;
   valorCateg: string;
 
-  API_ENDPOINT = 'http://joblinefree.com:98/api/articulo/search/';
+  API_ENDPOINT = 'http://35.224.231.248:98/api/articulo/search/';
 
   productos: Producto[];
   p: number = 1;

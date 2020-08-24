@@ -30,7 +30,7 @@ export class NavComponent implements OnInit {
 
   search = new FormControl('');
 
-  API_ENDPOINT = 'http://joblinefree.com:98/api/categoria';
+  API_ENDPOINT = 'http://35.224.231.248:98/api/categoria';
 
   categorias: Categoria[];
   productos = new Array();

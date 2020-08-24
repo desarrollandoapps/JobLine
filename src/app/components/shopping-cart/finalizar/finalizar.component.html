@@ -29,7 +29,7 @@
                     <p>Seleccione el departamento y ciudad donde quiere despachar sus productos.</p>
                     <form [formGroup]="checkoutForm2" (ngSubmit)="onSubmit(checkoutForm2.value)">
 
-                        <!-- <input type="hidden"  formControlName="codReferidor" [(ngModel)]="codigoReferidor"> -->
+                        <input type="hidden"  formControlName="codReferidor" [(ngModel)]="codigoReferidor">
 
                         <div class="form-group">
                             <label for="depto">Departamento</label>
