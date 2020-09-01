@@ -22,6 +22,8 @@ export class FinalizarComponent implements OnInit {
   API_ENDPOINT_REFERIDOR = "http://35.224.231.248:98/api/Persona/Referidor?CodRef="
   API_ENDPOINT_PAYU = "https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu"
 
+  LARAVEL = "http://127.0.0.1:8000"
+
   form: FormGroup;
 
   cartItems = [];
@@ -146,7 +148,6 @@ export class FinalizarComponent implements OnInit {
 
   onSubmit(datosForm) {
     //Obtener consecutivos
-
     let fecha = new Date().toISOString();
     fecha = fecha.substring(0, 19);
 
@@ -172,11 +173,13 @@ export class FinalizarComponent implements OnInit {
       persona: null,
       items: this.convertirProductosJson(this.cartItems)
     };
+    console.log(documentoInicial);
 
     if (datosForm.codigoReferidor !== '')
     {
       this.httpClient.post(this.API_ENDPOINT_DOC, documentoInicial).subscribe(
         (documento: Documento) => {
+          console.log(documento);
           this.id = documento.id
           this.numero = documento.numero
           console.log('Doc nuevo: ' + documento);
@@ -184,7 +187,8 @@ export class FinalizarComponent implements OnInit {
           //Enviar a PayU
           // this.enviarAPayU( documento )
           //Enviar a Laravel
-          this.enviarALaravel( documento )
+          console.log(this.id)
+          this.enviarALaravel( this.id )
         },
         response => {
           this.errorMessage = '';
@@ -309,51 +313,11 @@ export class FinalizarComponent implements OnInit {
       }
     );
   }
-  
-  enviarALaravel( documento: Documento )
-  {
-    let params = new HttpParams();
-    params = params.append('merchantId', '508029');
-    params = params.append('referenceCode', 'CM1-' + documento.numero);
-    params = params.append('description', 'Compra de productos');
-    params = params.append('amount', '' + documento.vrTotal);
-    params = params.append('tax', '0');
-    params = params.append('taxReturnBase', '0');
-    params = params.append('accountId', '512321');
-    params = params.append('signature', '5886034cd4f46a895366f7de837304da');
-    params = params.append('currency', 'COP');
-    params = params.append('payerFullName', 'APPROVED');
-    params = params.append('buyerFullName', 'APPROVED');
-    params = params.append('buyerEmail', documento.email);
-    params = params.append('shippingAddress', documento.direccion);
-    params = params.append('shippingCity', this.obtenerNombreCiudad(documento.ciudadId));
-    params = params.append('shippingCountry', 'CO');
-    params = params.append('telephone', documento.telefono,);
-    params = params.append('test', '1');
-    params = params.append('responseUrl', 'http://appincdevs.com/ResponsePayu.php');
 
-    let payuJson = {
-      merchantId:508029,
-      referenceCode:'CM1-' + documento.numero,
-      description:'Compra+de+productos',
-      amount:documento.vrTotal,
-      tax:0,
-      taxReturnBase:0,
-      accountId:512321,
-      signature:'5886034cd4f46a895366f7de837304da',
-      currency:'COP',
-      payerFullName:'APPROVED',
-      buyerFullName: documento.nombreCli,
-      buyerEmail: documento.email,
-      shippingAddress: documento.direccion,
-      shippingCity: this.obtenerNombreCiudad(documento.ciudadId),
-      shippingCountry:'CO',
-      telephone: documento.telefono,
-      test:1,
-      responseUrl:'http://appincdevs.com/ResponsePayu.php'
-    }
-    
-    this.httpClient.post(this.API_ENDPOINT_PAYU, payuJson).subscribe(
+  enviarALaravel( id )
+  {
+    console.log(id);
+    this.httpClient.get(this.LARAVEL + '?doc=' + id).subscribe(
       (respuesta) => {
         console.log('Envió');
       },

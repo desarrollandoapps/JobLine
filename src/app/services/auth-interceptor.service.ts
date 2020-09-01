@@ -14,7 +14,7 @@ export class AuthInterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    if (req.url !== 'https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu')
+    // if (req.url !== 'https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu')
     {
       this.token = localStorage.getItem('token');
       // alert(localStorage.getItem('In'));
@@ -57,9 +57,9 @@ export class AuthInterceptorService implements HttpInterceptor {
       return next.handle(reqClone);
       
     }
-    else {
-      return next.handle(req);
-    }
+    // else {
+    //   return next.handle(req);
+    // }
   }
 
 
