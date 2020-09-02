@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { JsonPipe } from '@angular/common';
 import { Documento } from 'src/app/interfaces/documento';
 import { LocalService } from 'src/app/services/local.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-finalizar',
@@ -43,7 +44,8 @@ export class FinalizarComponent implements OnInit {
   personaId;
 
   constructor(private carouselService: CarouselService, private formBuilder: FormBuilder,
-    private httpClient: HttpClient, private localService: LocalService) {
+    private httpClient: HttpClient, private localService: LocalService, 
+    private router: Router) {
     this.carouselService.updateCarouselMessage(false);
 
     this.checkoutForm1 = this.formBuilder.group({
@@ -182,10 +184,21 @@ export class FinalizarComponent implements OnInit {
           console.log(documento);
           this.id = documento.id;
           this.numero = documento.numero;
+          
+          //Limpiar carrito
+          this.localService.removeItem('codigo')
+          this.localService.removeItem('nombre')
+          this.localService.removeItem('cantidad')
+          this.localService.removeItem('detalle')
+          this.localService.removeItem('precioSu')
+          this.localService.removeItem('fotoArt')
+
           // Enviar a Laravel
           console.log(this.id);
           window.open(this.LARAVEL + 'documento/' + this.id, '_blank');
-          // window.location.href = this.LARAVEL + 'documento/' + this.id;
+          
+          //Enviar a home
+          this.router.navigate(['']);
         },
         response => {
           this.errorMessage = '';
