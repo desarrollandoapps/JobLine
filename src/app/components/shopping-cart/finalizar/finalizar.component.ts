@@ -22,7 +22,7 @@ export class FinalizarComponent implements OnInit {
   API_ENDPOINT_REFERIDOR = "http://35.224.231.248:98/api/Persona/Referidor?CodRef="
   API_ENDPOINT_PAYU = "https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu"
 
-  LARAVEL = "http://127.0.0.1:8000"
+  LARAVEL = "http://127.0.0.1:8000/"
 
   form: FormGroup;
 
@@ -180,23 +180,19 @@ export class FinalizarComponent implements OnInit {
       this.httpClient.post(this.API_ENDPOINT_DOC, documentoInicial).subscribe(
         (documento: Documento) => {
           console.log(documento);
-          this.id = documento.id
-          this.numero = documento.numero
-          console.log('Doc nuevo: ' + documento);
-          
-          //Enviar a PayU
-          // this.enviarAPayU( documento )
-          //Enviar a Laravel
-          console.log(this.id)
-          this.enviarALaravel( this.id )
+          this.id = documento.id;
+          this.numero = documento.numero;
+          // Enviar a Laravel
+          console.log(this.id);
+          window.open(this.LARAVEL + 'documento/' + this.id, '_blank');
+          // window.location.href = this.LARAVEL + 'documento/' + this.id;
         },
         response => {
           this.errorMessage = '';
-          console.log(response.error)
-
+          console.log(response.error);
         }
       );
-      
+
       // this.productos = this.cartService.clearCart();
       // this.checkoutForm1.reset();
 
@@ -207,7 +203,7 @@ export class FinalizarComponent implements OnInit {
         icon: 'warning',
         title: 'Ocurrió un error',
         text: '¡Debe ingresar el código del referidor!'
-      })
+      });
     }
 
   }
@@ -220,7 +216,7 @@ export class FinalizarComponent implements OnInit {
     {
       this.httpClient.get(this.API_ENDPOINT_REFERIDOR + datosForm.codReferidor ).subscribe(
         (personaId) => {
-          if( personaId !== 0 ) {
+          if ( personaId !== 0 ) {
             this.personaId = personaId;
             this.codigoReferidor = datosForm.codReferidor;
             this.existeVendedor = true;
@@ -247,12 +243,12 @@ export class FinalizarComponent implements OnInit {
     let pJson = new Array();
     p.forEach(item => {
       pJson.push( {
-        id: 0, 
-        documentoId: 0, 
-        articuloId: parseInt(item.id), 
+        id: 0,
+        documentoId: 0,
+        articuloId: parseInt(item.id),
         nombreArt: item.nombre,
-        cantidad: parseInt(item.cantidad), 
-        dcto: 0.00, 
+        cantidad: parseInt(item.cantidad),
+        dcto: 0.00,
         vrUnitario: parseFloat(item.precioSu),
         vrTotal: parseFloat(item.cantidad) * parseFloat(item.precioSu)
       })
@@ -305,19 +301,6 @@ export class FinalizarComponent implements OnInit {
     }
     
     this.httpClient.post(this.API_ENDPOINT_PAYU, payuJson).subscribe(
-      (respuesta) => {
-        console.log('Envió');
-      },
-      (error) => {
-        console.log('Error: ' + error);
-      }
-    );
-  }
-
-  enviarALaravel( id )
-  {
-    console.log(id);
-    this.httpClient.get(this.LARAVEL + '?doc=' + id).subscribe(
       (respuesta) => {
         console.log('Envió');
       },
